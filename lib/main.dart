@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(new MaterialApp(
   title: 'NAvigation with Routes',
   routes: <String, WidgetBuilder>{
-    '/': (_) => new Detail(),
+    '/': (_) => new List(),
     '/list': (_) => new List(),
     '/detail': (_) => new Detail(),
   },
