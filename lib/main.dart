@@ -2,26 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MaterialApp(
-  title: 'NAvigation with Routes',
-  routes: <String, WidgetBuilder>{
-    '/': (_) => new List(),
-    '/list': (_) => new List(),
-    '/detail': (_) => new Detail(),
-  },
-));
+void main() => runApp(new MyApp());
 
-class List extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: const Text('List'),
+        title: const Text('Home'),
       ),
       body: new Center(
         child: new RaisedButton(
           onPressed: (){
-            Navigator.of(context).pushNamed('/detail');
+            Navigator.of(context).pushNamed('/check');
           }
         ),
       )
@@ -29,17 +22,35 @@ class List extends StatelessWidget {
   }
 }
 
-class Detail extends StatelessWidget {
+class Check extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return new Scaffold(
         appBar: new AppBar(
-          title: const Text('Detail'),
+          title: const Text('Check'),
         ),
         body: new Center(
           child: new RaisedButton(
               onPressed: (){
-                Navigator.of(context).pop(true);
+                Navigator.of(context).pushNamed('/finish');
+              }
+          ),
+        )
+    );
+  }
+}
+
+class Finish extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return new Scaffold(
+        appBar: new AppBar(
+          title: const Text('Finish'),
+        ),
+        body: new Center(
+          child: new RaisedButton(
+              onPressed: (){
+                Navigator.popUntil(context,ModalRoute.withName('/'));
               }
           ),
         )
@@ -52,20 +63,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Navigation with Routes',
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (_) => new Home(),
+        '/check': (_) => new Check(),
+        '/finish': (_) => new Finish(),
+      },
     );
   }
 }
